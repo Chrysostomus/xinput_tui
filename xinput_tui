@@ -50,10 +50,26 @@ current_speed=$(xinput --list-props $touchpad_id | awk '/Accel Speed \(/ {print 
 	echo "input number between -1 and 1 and press enter"
 	read speed
 	xinput --set-prop $touchpad_id $accel_speed_code $speed
-
+	echo "Speed is now set to $speed."
+	read -r -p "${1:-Do you wish to make this setting permanent? [Y/n]} " response
+    case $response in
+        [nN][oO]) 
+            false
+            ;;
+        *)
+            sudo bash -c 'echo -e "Section \"InputClass\"
+	\tIdentifier \"'$touchpad_id'\"
+	\tDriver \"libinput\"
+	\tMatchIsTouchpad \"on\"
+	\tOption \"AccelSpeed\" \"'$speed'\"
+EndSection" > /etc/X11/xorg.conf.d/31-pointerspeed.conf'
+            ;;
+    esac
+    echo ""
+    echo "created file /etc/X11/xorg.conf.d/31-pointerspeed.conf. 
+    Press any key to continue"
+    read -s -n1
 }
-
-
 
 toggle_drag_lock()
 {
