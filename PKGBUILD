@@ -16,5 +16,5 @@ md5sums=('SKIP')
 
 package () {
 	cd "$srcdir"
-        install -Dm755 "$srcdir/$pkgname/xinput-tui" "$pkgdir/usr/bin/xinput-tui"
+        install -Dm755 "$srcdir/$pkgname/xinput-tui" "$pkgdir/usr/bin/"
 }
