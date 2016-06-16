@@ -6,7 +6,7 @@ pkgrel=1
 pkgdesc="An interactive xinput interface using bash"
 arch=(any)
 url="https://github.com/Chrysostomus/$pkgname"
-license=MIT
+license=('MIT')
 depends=('xorg-xinput'
 	'awk'
 	'bash')
@@ -16,5 +16,5 @@ md5sums=('SKIP')
 
 package () {
 	cd "$srcdir"
-        install -Dm755 "$srcdir/$pkgname/mhwd-tui" "$pkgdir/usr/bin/mhwd-tui"
+        install -Dm755 "$srcdir/$pkgname/xinput-tui" "$pkgdir/usr/bin/xinput-tui"
 }
