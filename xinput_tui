@@ -1,6 +1,6 @@
 #!/bin/bash
 ## xinput_tui
-touchpad_id=$(xinput --list | grep -i "touchpad" | xargs -n 1 | grep "id=" | sed 's/id=//g')
+touchpad_id=$(xinput --list | grep "Touchpad" | xargs -n 1 | grep "id=" | sed 's/id=//g')
 
 toggle_natural_scrolling()
 {
@@ -121,6 +121,9 @@ function main {
     echo -e " │    5   Toggle disable while typing       │"
     echo -e " │    6   Toggle natural scrolling          │"
     echo -e " │    7   Toggle horizontal scrolling       │"
+    echo -e " │    8   Show xinput manual                │"
+    echo -e " │    9   Show xinput wiki entry            │"
+    echo -e " │    L   Run lxinput                       │"
     echo -e " └──────────────────────────────────────────┘"
     echo -e "   Select an item   -     0   Exit "
     echo ""
@@ -158,6 +161,22 @@ function main {
         7)
             echo
             toggle_horizontal_scrolling
+            read -s -n1
+            ;;
+        8)
+            echo
+            man xinput                 
+            read -s -n1
+            ;;
+        9)
+            echo
+            $BROWSER https://wiki.archlinux.org/index.php/Touchpad_Synaptics
+            read -s -n1
+            ;;
+        l|L)
+            echo
+            lxinput &>/dev/null 
+			echo -e "Operation complete. Press any key to continue."                  
             read -s -n1
             ;;
         0)
