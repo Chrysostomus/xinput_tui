@@ -107,6 +107,22 @@ fi
 
 }
 
+function gui {
+	if [ -e /usr/bin/lxinput ]; then
+		lxinput
+	else
+		read -p "Lxinput is not installed. Should it be installed? (y/N)" -n 1 -r
+		echo
+		if [[ $REPLY =~ ^[Yy]$ ]]
+		then
+			if [ -e /var/lib/pacman/db.lck ]; then 
+				echo "Pacman seems to be currently in use."
+			else 
+				sudo pacman -Sy lxinput && lxinput &>/dev/null
+			fi
+		fi
+	fi
+}
 
 function main {
     while true; do
@@ -175,7 +191,7 @@ function main {
             ;;
         l|L)
             echo
-            lxinput &>/dev/null 
+            gui 
 			echo -e "Operation complete. Press any key to continue."                  
             read -s -n1
             ;;
