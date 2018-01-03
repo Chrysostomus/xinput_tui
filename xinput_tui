@@ -53,7 +53,7 @@ current_speed=$(xinput --list-props $touchpad_id | awk '/Accel Speed \(/ {print 
 	echo "Speed is now set to $speed."
 	read -r -p "${1:-Do you wish to make this setting permanent? [Y/n]} " response
     case $response in
-        [nN][oO]) 
+        [nN] | [nN][oO]) 
             false
             ;;
         *)
@@ -63,11 +63,11 @@ current_speed=$(xinput --list-props $touchpad_id | awk '/Accel Speed \(/ {print 
 	\tMatchIsTouchpad \"on\"
 	\tOption \"AccelSpeed\" \"'$speed'\"
 EndSection" > /etc/X11/xorg.conf.d/31-pointerspeed.conf'
-            ;;
+   	 echo ""
+	 echo "created file /etc/X11/xorg.conf.d/31-pointerspeed.conf."
+         ;;
     esac
-    echo ""
-    echo "created file /etc/X11/xorg.conf.d/31-pointerspeed.conf. 
-    Press any key to continue"
+    echo "Press any key to continue"
     read -s -n1
 }
 
