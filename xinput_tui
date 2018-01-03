@@ -1,6 +1,6 @@
 #!/bin/bash
 ## xinput_tui
-touchpad_id=$(xinput --list | grep "Touchpad" | xargs -n 1 | grep "id=" | sed 's/id=//g')
+touchpad_id=$(xinput --list | grep -i "Touchpad" | xargs -n 1 | grep "id=" | sed 's/id=//g')
 
 toggle_natural_scrolling()
 {
